@@ -135,7 +135,7 @@ func ListReleaseNotes(
 	dedupeCache := map[string]struct{}{}
 	notes := []*ReleaseNote{}
 	for _, commit := range commits {
-		if commit.GetAuthor().GetLogin() != "k8s-ci-robot" {
+		if commit.GetAuthor().GetLogin() != "openshift-merge-robot" {
 			continue
 		}
 
@@ -208,7 +208,7 @@ func ReleaseNoteFromCommit(commit *github.RepositoryCommit, client *github.Clien
 
 	author := pr.GetUser().GetLogin()
 	authorUrl := fmt.Sprintf("https://github.com/%s", author)
-	prUrl := fmt.Sprintf("https://github.com/kubernetes/kubernetes/pull/%d", pr.GetNumber())
+	prUrl := fmt.Sprintf("https://github.com/openshift/openshift-azure/pull/%d", pr.GetNumber())
 	IsFeature := HasString(LabelsWithPrefix(pr, "kind"), "feature")
 	IsDuplicate := false
 	sigsListPretty := prettifySigList(LabelsWithPrefix(pr, "sig"))
@@ -381,7 +381,7 @@ func ListCommitsWithNotes(
 func PRFromCommit(client *github.Client, commit *github.RepositoryCommit, opts ...githubApiOption) (*github.PullRequest, error) {
 	c := configFromOpts(opts...)
 
-	// Thankfully k8s-merge-robot commits the PR number consistently. If this ever
+	// Thankfully openshift-merge-robot commits the PR number consistently. If this ever
 	// stops being true, this definitely won't work anymore.
 	exp := regexp.MustCompile(`Merge pull request #(?P<number>\d+)`)
 	match := exp.FindStringSubmatch(*commit.Commit.Message)
@@ -445,11 +445,11 @@ func filterCommits(
 	filteredCommits := []*github.RepositoryCommit{}
 	for _, commit := range commits {
 		body := commit.GetCommit().GetMessage()
-		if commit.GetAuthor().GetLogin() == "k8s-merge-robot" {
+		if commit.GetAuthor().GetLogin() == "openshift-merge-robot" {
 			pr, err := PRFromCommit(client, commit, opts...)
 			if err != nil {
 				level.Info(logger).Log(
-					"msg", "error getting PR from k8s-merge-robot commit",
+					"msg", "error getting PR from openshift-merge-robot commit",
 					"err", err,
 					"sha", commit.GetSHA(),
 				)
@@ -484,8 +484,8 @@ func filterCommits(
 func configFromOpts(opts ...githubApiOption) *githubApiConfig {
 	c := &githubApiConfig{
 		ctx:    context.Background(),
-		org:    "kubernetes",
-		repo:   "kubernetes",
+		org:    "openshift",
+		repo:   "openshift-azure",
 		branch: "master",
 	}
 

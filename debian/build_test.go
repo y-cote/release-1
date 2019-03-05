@@ -111,7 +111,7 @@ func TestGetKubeadmDependencies(t *testing.T) {
 				"kubectl (>= 1.6.0)",
 				"kubernetes-cni (= 0.6.0)",
 				"${misc:Depends}",
-				"cri-tools (>= 1.11.0)",
+				"cri-tools (>= 1.11.1)",
 			},
 		},
 	}

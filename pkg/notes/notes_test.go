@@ -39,14 +39,14 @@ func githubClient(t *testing.T) *github.Client {
 func TestConfigFromOpts(t *testing.T) {
 	// fake config with an override for the org
 	c := configFromOpts(
-		WithOrg("marpaia"),
+		WithOrg("openshift"),
 	)
 
 	// test the override works
-	require.Equal(t, "marpaia", c.org)
+	require.Equal(t, "openshift", c.org)
 
 	// test the default value
-	require.Equal(t, "kubernetes", c.repo)
+	require.Equal(t, "openshift-azure", c.repo)
 }
 
 func TestStripActionRequired(t *testing.T) {
@@ -74,14 +74,13 @@ func TestStripStar(t *testing.T) {
 func TestReleaseNoteParsing(t *testing.T) {
 	client := githubClient(t)
 	commitsWithNote := []string{
-		"973dcd0c1a2555a6726aed8248ca816c9771253f",
-		"27e5971c11cfcda703a39ed670a565f0f3564713",
+		"fe0e7390a166187c192c50db765b29af3126a746",
 	}
 	ctx := context.Background()
 
 	for _, sha := range commitsWithNote {
 		fmt.Println(sha)
-		commit, _, err := client.Repositories.GetCommit(ctx, "kubernetes", "kubernetes", sha)
+		commit, _, err := client.Repositories.GetCommit(ctx, "openshift", "openshift-azure", sha)
 		require.NoError(t, err)
 		_, err = ReleaseNoteFromCommit(commit, client)
 		require.NoError(t, err)
