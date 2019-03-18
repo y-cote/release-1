@@ -1,6 +1,6 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
 
-# gazelle:prefix k8s.io/release
+# gazelle:prefix github.com/y-cote/release-1
 gazelle(
     name = "gazelle",
     external = "vendored",

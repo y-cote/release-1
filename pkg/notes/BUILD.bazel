@@ -6,7 +6,7 @@ go_library(
         "document.go",
         "notes.go",
     ],
-    importpath = "k8s.io/release/pkg/notes",
+    importpath = "github.com/y-cote/release-1/pkg/notes",
     visibility = ["//visibility:public"],
     deps = [
         "//vendor/github.com/go-kit/kit/log:go_default_library",
