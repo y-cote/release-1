@@ -111,15 +111,9 @@
   revision = "150dc57a1b433e64154302bdc40b6bb8aefa313a"
   version = "v1.0.0"
 
-[[projects]]
-  branch = "master"
-  name = "github.com/y-cote/release-1"
-  packages = ["pkg/notes"]
-  revision = "6ac289ab0109e80f3f37d5767961ec98f091b2d2"
-
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "e8b0125daa003eb279dc034a83af449ef2c211930a5f51455c1472c58f45fc1e"
+  inputs-digest = "df1a61561ea8d21613b40410905a3bf98516b997e18d5025ff8728e9553fa30a"
   solver-name = "gps-cdcl"
   solver-version = 1
